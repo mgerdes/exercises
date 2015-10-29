@@ -1,0 +1,12 @@
+(define (square-tree t)
+  (cond ((null? t) '())
+        ((number? t) (* t t))
+        (else (cons (square-tree (car t))
+                    (square-tree (cdr t))))))
+
+(define (square-tree t)
+  (map (lambda (el)
+         (if (number? el)
+           (* el el)
+           (square-tree el))) 
+       t))
