@@ -8,7 +8,6 @@ GLuint compile_shader(char* filename, GLenum shader_type);
 GLuint create_shader_program(char* frag_shader, char* vert_shader); 
 const char* read_file(char* filename);
 GLuint create_texture(char* texture_file);
-int load_mesh(const char* filename, GLuint* vao, int* point_count);
 
 GLFWwindow* window;
 int window_width, window_height;

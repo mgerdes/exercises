@@ -45,6 +45,24 @@ Vec* normalize_vec(Vec* v) {
     return create_vec(v->x / length, v->y / length, v->z / length, v->w);
 }
 
+Mat* create_rotation_mat(Vec* u, double theta) {
+    double c = cos(theta);
+    double s = sin(theta);
+    double x1 = c + u->x * u->x * (1 - c);
+    double x2 = u->x * u->y * (1 - c) - u->z * s;
+    double x3 = u->x * u->z * (1 - c) + u->y * s;
+    double y1 = u->y * u->x * (1 - c) + u->z * s;
+    double y2 = c + u->y * u->y * (1 - c);
+    double y3 = u->y * u->z * (1 - c) - u->x * s;
+    double z1 = u->z * u->x * (1 - c) - u->y * s;
+    double z2 = u->z * u->y * (1 - c) + u->x * s;
+    double z3 = c + u->z * u->z * (1 - c);
+    return create_mat(x1, y1, z1, 0, 
+                      x2, y2, z2, 0, 
+                      x3, y3, z3, 0, 
+                      0, 0, 0, 1);
+}
+
 Vec* rotate_vec(Vec* v, Vec* u, double theta) {
     double c = cos(theta);
     double s = sin(theta);
@@ -60,7 +78,7 @@ Vec* rotate_vec(Vec* v, Vec* u, double theta) {
     Mat* rotate_mat = create_mat(x1, y1, z1, 0, 
                                  x2, y2, z2, 0, 
                                  x3, y3, z3, 0, 
-                                 0, 0, 0, 0);
+                                 0, 0, 0, 1);
     Vec* r = mat_times_vec(rotate_mat, v);
     delete_mat(rotate_mat);
     return r;
@@ -70,7 +88,7 @@ Vec* rotate_vec_y(Vec* v, double theta) {
     Mat* rotate_mat = create_mat(cos(theta), 0, -sin(theta), 0, 
                                 0, 1, 0, 0, 
                                 sin(theta), 0, cos(theta), 0, 
-                                0, 0, 0, 0);
+                                0, 0, 0, 1);
     Vec* r = mat_times_vec(rotate_mat, v);
     delete_mat(rotate_mat);
     return r;
@@ -80,7 +98,7 @@ Vec* rotate_vec_x(Vec* v, double theta) {
     Mat* rotate_mat = create_mat(1, 0, 0, 0, 
                                 0, cos(theta), sin(theta), 0, 
                                 0, -sin(theta), cos(theta), 0, 
-                                0, 0, 0, 0);
+                                0, 0, 0, 1);
     Vec* r = mat_times_vec(rotate_mat, v);
     delete_mat(rotate_mat);
     return r;
@@ -221,6 +239,120 @@ Mat* create_perspective_mat(double fovy, double aspect, double near, double far)
     m->m[14] = pz;
     m->m[11] = -1.0f;
     return m;
+}
+
+double determinant(Mat* m) {
+	return
+		m->m[12] * m->m[9] * m->m[6] * m->m[3] -
+		m->m[8] * m->m[13] * m->m[6] * m->m[3] -
+		m->m[12] * m->m[5] * m->m[10] * m->m[3] +
+		m->m[4] * m->m[13] * m->m[10] * m->m[3] +
+		m->m[8] * m->m[5] * m->m[14] * m->m[3] -
+		m->m[4] * m->m[9] * m->m[14] * m->m[3] -
+		m->m[12] * m->m[9] * m->m[2] * m->m[7] +
+		m->m[8] * m->m[13] * m->m[2] * m->m[7] +
+		m->m[12] * m->m[1] * m->m[10] * m->m[7] -
+		m->m[0] * m->m[13] * m->m[10] * m->m[7] -
+		m->m[8] * m->m[1] * m->m[14] * m->m[7] +
+		m->m[0] * m->m[9] * m->m[14] * m->m[7] +
+		m->m[12] * m->m[5] * m->m[2] * m->m[11] -
+		m->m[4] * m->m[13] * m->m[2] * m->m[11] -
+		m->m[12] * m->m[1] * m->m[6] * m->m[11] +
+		m->m[0] * m->m[13] * m->m[6] * m->m[11] +
+		m->m[4] * m->m[1] * m->m[14] * m->m[11] -
+		m->m[0] * m->m[5] * m->m[14] * m->m[11] -
+		m->m[8] * m->m[5] * m->m[2] * m->m[15] +
+		m->m[4] * m->m[9] * m->m[2] * m->m[15] +
+		m->m[8] * m->m[1] * m->m[6] * m->m[15] -
+		m->m[0] * m->m[9] * m->m[6] * m->m[15] -
+		m->m[4] * m->m[1] * m->m[10] * m->m[15] +
+		m->m[0] * m->m[5] * m->m[10] * m->m[15];
+}
+
+Mat* invert_matrix(Mat* m) {
+    double inv_det = 1.0 / determinant(m);
+
+    return create_mat( 
+            inv_det * (
+                    m->m[9] * m->m[14] * m->m[7] - m->m[13] * m->m[10] * m->m[7] +
+                    m->m[13] * m->m[6] * m->m[11] - m->m[5] * m->m[14] * m->m[11] -
+                    m->m[9] * m->m[6] * m->m[15] + m->m[5] * m->m[10] * m->m[15]
+                    ),
+            inv_det * (
+                    m->m[12] * m->m[10] * m->m[7] - m->m[8] * m->m[14] * m->m[7] -
+                    m->m[12] * m->m[6] * m->m[11] + m->m[4] * m->m[14] * m->m[11] +
+                    m->m[8] * m->m[6] * m->m[15] - m->m[4] * m->m[10] * m->m[15]
+                    ),
+            inv_det * (
+                    m->m[8] * m->m[13] * m->m[7] - m->m[12] * m->m[9] * m->m[7] +
+                    m->m[12] * m->m[5] * m->m[11] - m->m[4] * m->m[13] * m->m[11] -
+                    m->m[8] * m->m[5] * m->m[15] + m->m[4] * m->m[9] * m->m[15]
+                    ),
+            inv_det * ( 
+                    m->m[12] * m->m[9] * m->m[6] - m->m[8] * m->m[13] * m->m[6] -
+                    m->m[12] * m->m[5] * m->m[10] + m->m[4] * m->m[13] * m->m[10] +
+                    m->m[8] * m->m[5] * m->m[14] - m->m[4] * m->m[9] * m->m[14]
+                    ),
+            inv_det * (
+                    m->m[13] * m->m[10] * m->m[3] - m->m[9] * m->m[14] * m->m[3] -
+                    m->m[13] * m->m[2] * m->m[11] + m->m[1] * m->m[14] * m->m[11] +
+                    m->m[9] * m->m[2] * m->m[15] - m->m[1] * m->m[10] * m->m[15]
+                    ),
+            inv_det * (
+                    m->m[8] * m->m[14] * m->m[3] - m->m[12] * m->m[10] * m->m[3] +
+                    m->m[12] * m->m[2] * m->m[11] - m->m[0] * m->m[14] * m->m[11] -
+                    m->m[8] * m->m[2] * m->m[15] + m->m[0] * m->m[10] * m->m[15]
+                    ),
+            inv_det * ( 
+                    m->m[12] * m->m[9] * m->m[3] - m->m[8] * m->m[13] * m->m[3] -
+                    m->m[12] * m->m[1] * m->m[11] + m->m[0] * m->m[13] * m->m[11] +
+                    m->m[8] * m->m[1] * m->m[15] - m->m[0] * m->m[9] * m->m[15]
+                    ),
+            inv_det * ( 
+                    m->m[8] * m->m[13] * m->m[2] - m->m[12] * m->m[9] * m->m[2] +
+                    m->m[12] * m->m[1] * m->m[10] - m->m[0] * m->m[13] * m->m[10] -
+                    m->m[8] * m->m[1] * m->m[14] + m->m[0] * m->m[9] * m->m[14]
+                    ),
+            inv_det * (
+                    m->m[5] * m->m[14] * m->m[3] - m->m[13] * m->m[6] * m->m[3] +
+                    m->m[13] * m->m[2] * m->m[7] - m->m[1] * m->m[14] * m->m[7] -
+                    m->m[5] * m->m[2] * m->m[15] + m->m[1] * m->m[6] * m->m[15]
+                    ),
+            inv_det * (
+                    m->m[12] * m->m[6] * m->m[3] - m->m[4] * m->m[14] * m->m[3] -
+                    m->m[12] * m->m[2] * m->m[7] + m->m[0] * m->m[14] * m->m[7] +
+                    m->m[4] * m->m[2] * m->m[15] - m->m[0] * m->m[6] * m->m[15]
+                    ),
+            inv_det * ( 
+                    m->m[4] * m->m[13] * m->m[3] - m->m[12] * m->m[5] * m->m[3] +
+                    m->m[12] * m->m[1] * m->m[7] - m->m[0] * m->m[13] * m->m[7] -
+                    m->m[4] * m->m[1] * m->m[15] + m->m[0] * m->m[5] * m->m[15]
+                    ),
+            inv_det * ( 
+                    m->m[12] * m->m[5] * m->m[2] - m->m[4] * m->m[13] * m->m[2] -
+                    m->m[12] * m->m[1] * m->m[6] + m->m[0] * m->m[13] * m->m[6] +
+                    m->m[4] * m->m[1] * m->m[14] - m->m[0] * m->m[5] * m->m[14]
+                    ),
+            inv_det * (
+                    m->m[9] * m->m[6] * m->m[3] - m->m[5] * m->m[10] * m->m[3] -
+                    m->m[9] * m->m[2] * m->m[7] + m->m[1] * m->m[10] * m->m[7] +
+                    m->m[5] * m->m[2] * m->m[11] - m->m[1] * m->m[6] * m->m[11]
+                    ),
+            inv_det * (
+                    m->m[4] * m->m[10] * m->m[3] - m->m[8] * m->m[6] * m->m[3] +
+                    m->m[8] * m->m[2] * m->m[7] - m->m[0] * m->m[10] * m->m[7] -
+                    m->m[4] * m->m[2] * m->m[11] + m->m[0] * m->m[6] * m->m[11]
+                    ),
+            inv_det * ( 
+                    m->m[8] * m->m[5] * m->m[3] - m->m[4] * m->m[9] * m->m[3] -
+                    m->m[8] * m->m[1] * m->m[7] + m->m[0] * m->m[9] * m->m[7] +
+                    m->m[4] * m->m[1] * m->m[11] - m->m[0] * m->m[5] * m->m[11]
+                    ),
+            inv_det * ( 
+                    m->m[4] * m->m[9] * m->m[2] - m->m[8] * m->m[5] * m->m[2] +
+                    m->m[8] * m->m[1] * m->m[6] - m->m[0] * m->m[9] * m->m[6] -
+                    m->m[4] * m->m[1] * m->m[10] + m->m[0] * m->m[5] * m->m[10]
+                    ));
 }
 
 void print_mat(Mat* m) {

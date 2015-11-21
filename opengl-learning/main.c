@@ -3,10 +3,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "gl_utils.h"
-#include "human_object.h"
-#include "monkey_object.h"
 #include "camera.h"
 #include "maths.h"
+#include "mesh_import.h"
+#include "human_object.h"
+#include "monkey_object.h"
 
 Camera* camera;
 
@@ -16,16 +17,16 @@ void handle_input() {
 
     if (current_seconds > last_key_press + 0.15) {
         if (glfwGetKey(window, GLFW_KEY_A)) {
-            rotate_camera_left(camera, 0.02);
+            rotate_camera_left(camera, 0.04);
         }
         if (glfwGetKey(window, GLFW_KEY_D)) {
-            rotate_camera_left(camera, -0.02);
+            rotate_camera_left(camera, -0.04);
         }
         if (glfwGetKey(window, GLFW_KEY_W)) {
-            rotate_camera_up(camera, -0.02);
+            rotate_camera_up(camera, -0.04);
         }
         if (glfwGetKey(window, GLFW_KEY_S)) {
-            rotate_camera_up(camera, 0.02);
+            rotate_camera_up(camera, 0.04);
         }
         if (glfwGetKey(window, GLFW_KEY_COMMA)) {
             zoom_camera(camera, 1.01);
@@ -55,7 +56,8 @@ int main() {
 	glUniformMatrix4fv(proj_mat_location, 1, GL_FALSE, proj_mat->m);
     glUniformMatrix4fv(view_mat_location,1, GL_FALSE, view_mat->m);
 
-    MonkeyObject* monkey = create_monkey_object();
+    MonkeyObject* monkey = create_monkey_object(shader_program);
+    animate_monkey_object(monkey);
 
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -66,12 +68,11 @@ int main() {
         glUniformMatrix4fv(view_mat_location,1, GL_FALSE, view_mat->m);
 
         draw_monkey_object(monkey);
+        animate_monkey_object(monkey);
 
         glfwPollEvents();
         glfwSwapBuffers(window);
     }
 
     glfwTerminate();
-    delete_mat(proj_mat);
-    delete_mat(view_mat);
 }

@@ -4,8 +4,8 @@
 
 Camera* create_default_camera() {
     return create_camera(0,0,0,
-            0,5,1,
-            0,1,0);
+                         0,-5,1,
+                         0,0,1);
 }
 
 Camera* create_camera(double center_x, double center_y, double center_z,

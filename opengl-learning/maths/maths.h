@@ -31,8 +31,10 @@ Mat* create_mat(double, double, double, double,
         double, double, double, double);
 void delete_mat(Mat*);
 Mat* identity_mat();
+Mat* create_rotation_mat(Vec*, double);
 Mat* mat_times_mat(Mat*, Mat*);
 Mat* create_perspective_mat(double, double, double, double);
 Mat* create_look_at_mat(Camera*);
 Mat* create_translation_mat(double, double, double);
+Mat* invert_matrix(Mat*);
 void print_mat(Mat*);
