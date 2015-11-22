@@ -4,7 +4,7 @@
 
 Camera* create_default_camera() {
     return create_camera(0,0,0,
-                         0,-5,1,
+                         0,-3,1,
                          0,0,1);
 }
 

@@ -8,6 +8,7 @@
 #include "mesh_import.h"
 #include "human_object.h"
 #include "monkey_object.h"
+#include "sphere_object.h"
 
 Camera* camera;
 
@@ -59,6 +60,8 @@ int main() {
     MonkeyObject* monkey = create_monkey_object(shader_program);
     animate_monkey_object(monkey);
 
+    SphereObject* sphere = create_sphere_object(80, 10);
+
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -67,8 +70,10 @@ int main() {
         view_mat = create_look_at_mat(camera);
         glUniformMatrix4fv(view_mat_location,1, GL_FALSE, view_mat->m);
 
-        draw_monkey_object(monkey);
+        //draw_monkey_object(monkey);
         animate_monkey_object(monkey);
+
+        draw_sphere_object(sphere);
 
         glfwPollEvents();
         glfwSwapBuffers(window);

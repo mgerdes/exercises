@@ -10,7 +10,7 @@
 #include "mesh_import.h"
 #include "monkey_object.h"
 
-static double speed = 0.12;
+static double speed = 0.01;
 static double theta = 0;
 static GLuint bone_matrices_locations[64];
 static GLuint shader_program;
@@ -41,6 +41,13 @@ void draw_monkey_object(MonkeyObject* monkey) {
 void animate_monkey_object(MonkeyObject* monkey) {
     static int direction = -1;
     theta += direction * speed;
-    Mat* hi = create_rotation_mat(&z_axis, theta);        
-    glUniformMatrix4fv(bone_matrices_locations[0], 1, GL_FALSE, hi->m);
+    if (abs(theta) > 0.2) {
+        direction *= -1;
+    }
+
+    Mat* head_mat = create_rotation_mat(&z_axis, theta);        
+    glUniformMatrix4fv(bone_matrices_locations[0], 1, GL_FALSE, head_mat->m);
+    Mat* ears_mat = mat_times_mat(head_mat, create_rotation_mat(&x_axis, theta));
+    glUniformMatrix4fv(bone_matrices_locations[1], 1, GL_FALSE, ears_mat->m);
+    glUniformMatrix4fv(bone_matrices_locations[2], 1, GL_FALSE, ears_mat->m);
 }

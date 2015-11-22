@@ -9,6 +9,8 @@ uniform mat4 bone_matrices[64];
 out vec3 color;
 
 void main () {
-    color = vertex_normal;
-    gl_Position = proj_mat * view_mat * bone_matrices[bone_id] * vec4(vertex_position, 1.0);
+    //color = vertex_normal;
+    color = vec3(0,1,1);
+    //gl_Position = proj_mat * view_mat * bone_matrices[bone_id] * vec4(vertex_position, 1.0);
+    gl_Position = proj_mat * view_mat * vec4(vertex_position, 1.0);
 }
