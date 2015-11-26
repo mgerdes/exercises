@@ -10,24 +10,20 @@
 #include "mesh_import.h"
 #include "monkey_object.h"
 
-static double speed = 0.01;
-static double theta = 0;
-static GLuint bone_matrices_locations[64];
-static GLuint shader_program;
-
 MonkeyObject* create_monkey_object(GLuint shader_program_i) {
-    shader_program = shader_program_i;
-
     MonkeyObject* monkey = malloc(sizeof(MonkeyObject));
     load_mesh("objects/monkey.dae", &monkey->vao, &monkey->vertex_count, &monkey->root_node, monkey->bone_offset_mats);
+
+    monkey->speed = 0.02;
+    monkey->direction = -1;
 
     char name[64];
     //Mat* identity = create_translation_mat(1,1,1);
     Mat* identity = identity_mat();; 
     for (int i = 0; i < 64; i++) {
         sprintf(name, "bone_matrices[%i]", i);
-        bone_matrices_locations[i] = glGetUniformLocation(shader_program, name);
-        glUniformMatrix4fv(bone_matrices_locations[i], 1, GL_FALSE, identity->m);
+        monkey->bone_matrices_locations[i] = glGetUniformLocation(shader_program_i, name);
+        glUniformMatrix4fv(monkey->bone_matrices_locations[i], 1, GL_FALSE, identity->m);
     }
 
     return monkey;
@@ -39,15 +35,14 @@ void draw_monkey_object(MonkeyObject* monkey) {
 }
 
 void animate_monkey_object(MonkeyObject* monkey) {
-    static int direction = -1;
-    theta += direction * speed;
-    if (abs(theta) > 0.2) {
-        direction *= -1;
+    monkey->theta += monkey->direction * monkey->speed;
+    if (abs(monkey->theta) > 0.02) {
+        monkey->direction *= -1;
     }
 
-    Mat* head_mat = create_rotation_mat(&z_axis, theta);        
-    glUniformMatrix4fv(bone_matrices_locations[0], 1, GL_FALSE, head_mat->m);
-    Mat* ears_mat = mat_times_mat(head_mat, create_rotation_mat(&x_axis, theta));
-    glUniformMatrix4fv(bone_matrices_locations[1], 1, GL_FALSE, ears_mat->m);
-    glUniformMatrix4fv(bone_matrices_locations[2], 1, GL_FALSE, ears_mat->m);
+    Mat* head_mat = create_rotation_mat(&z_axis, monkey->theta);        
+    glUniformMatrix4fv(monkey->bone_matrices_locations[0], 1, GL_FALSE, head_mat->m);
+    Mat* ears_mat = mat_times_mat(head_mat, create_rotation_mat(&x_axis, monkey->theta));
+    glUniformMatrix4fv(monkey->bone_matrices_locations[1], 1, GL_FALSE, ears_mat->m);
+    glUniformMatrix4fv(monkey->bone_matrices_locations[2], 1, GL_FALSE, ears_mat->m);
 }

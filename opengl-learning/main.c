@@ -41,11 +41,11 @@ void handle_input() {
 void init() {
     window_height = window_width = 1000;
     camera = create_default_camera();
-    init_gl("opengl");
 }
 
 int main() {
     init();
+    init_gl("opengl");
 
     GLuint shader_program = create_shader_program("shaders/frag.glsl", "shaders/vert.glsl");
 	GLuint proj_mat_location = glGetUniformLocation(shader_program, "proj_mat");
@@ -60,7 +60,7 @@ int main() {
     MonkeyObject* monkey = create_monkey_object(shader_program);
     animate_monkey_object(monkey);
 
-    SphereObject* sphere = create_sphere_object(80, 10);
+    SphereObject* sphere = create_sphere_object(1, 100);
 
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -70,7 +70,7 @@ int main() {
         view_mat = create_look_at_mat(camera);
         glUniformMatrix4fv(view_mat_location,1, GL_FALSE, view_mat->m);
 
-        //draw_monkey_object(monkey);
+        draw_monkey_object(monkey);
         animate_monkey_object(monkey);
 
         draw_sphere_object(sphere);

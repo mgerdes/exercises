@@ -58,7 +58,9 @@ SphereObject* create_sphere_object(double r, int p) {
 
     SphereObject* s = malloc(sizeof(SphereObject));
 
-    s->vertex_count = (p+1)*2;
+    s->vertex_count = p*6+6;
+    s->r = r;
+    s->p = p;
 
     glGenVertexArrays(1, &s->vao);
     glBindVertexArray(s->vao);
@@ -87,5 +89,5 @@ SphereObject* create_sphere_object(double r, int p) {
 
 void draw_sphere_object(SphereObject* sphere) {
     glBindVertexArray(sphere->vao);
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, sphere->vertex_count);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, (sphere->p + 1) * 2);
 }

@@ -1,3 +1,4 @@
 log
-openl
+opengl
 *.out
+*.swp
