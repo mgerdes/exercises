@@ -9,6 +9,6 @@ typedef struct MonkeyObject {
     Mat* bone_offset_mats[16];
 } MonkeyObject;
 
-MonkeyObject* create_monkey_object();
+MonkeyObject* create_monkey_object(GLuint shader_program);
 void draw_monkey_object(MonkeyObject* monkey);
 void animate_monkey_object(MonkeyObject* monkey);

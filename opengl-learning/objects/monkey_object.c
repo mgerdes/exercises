@@ -10,7 +10,7 @@
 #include "mesh_import.h"
 #include "monkey_object.h"
 
-MonkeyObject* create_monkey_object(GLuint shader_program_i) {
+MonkeyObject* create_monkey_object(GLuint shader_program) {
     MonkeyObject* monkey = malloc(sizeof(MonkeyObject));
     load_mesh("objects/monkey.dae", &monkey->vao, &monkey->vertex_count, &monkey->root_node, monkey->bone_offset_mats);
 
@@ -22,7 +22,7 @@ MonkeyObject* create_monkey_object(GLuint shader_program_i) {
     Mat* identity = identity_mat();; 
     for (int i = 0; i < 64; i++) {
         sprintf(name, "bone_matrices[%i]", i);
-        monkey->bone_matrices_locations[i] = glGetUniformLocation(shader_program_i, name);
+        monkey->bone_matrices_locations[i] = glGetUniformLocation(shader_program, name);
         glUniformMatrix4fv(monkey->bone_matrices_locations[i], 1, GL_FALSE, identity->m);
     }
 

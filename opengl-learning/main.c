@@ -57,10 +57,8 @@ int main() {
 	glUniformMatrix4fv(proj_mat_location, 1, GL_FALSE, proj_mat->m);
     glUniformMatrix4fv(view_mat_location,1, GL_FALSE, view_mat->m);
 
-    MonkeyObject* monkey = create_monkey_object(shader_program);
-    animate_monkey_object(monkey);
-
-    SphereObject* sphere = create_sphere_object(1, 100);
+    MonkeyObject* monkey = create_monkey_object(shader_program); 
+    HumanObject* human = create_human_object(shader_program); 
 
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -70,10 +68,8 @@ int main() {
         view_mat = create_look_at_mat(camera);
         glUniformMatrix4fv(view_mat_location,1, GL_FALSE, view_mat->m);
 
-        draw_monkey_object(monkey);
-        animate_monkey_object(monkey);
-
-        draw_sphere_object(sphere);
+        animate_human_object(human);
+        draw_human_object(human);
 
         glfwPollEvents();
         glfwSwapBuffers(window);
