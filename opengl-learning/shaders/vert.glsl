@@ -23,7 +23,7 @@ void main () {
         color.g = 1;
     }
     color = vertex_normal;
-    gl_Position = proj_mat * view_mat * bone_matrices[bone_id] * vec4(vertex_position, 1.0);
-    //gl_Position = proj_mat * view_mat * vec4(vertex_position, 1.0);
+    //gl_Position = proj_mat * view_mat * bone_matrices[bone_id] * vec4(vertex_position, 1.0);
+    gl_Position = proj_mat * view_mat * vec4(vertex_position, 1.0);
 }
 

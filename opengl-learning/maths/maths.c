@@ -45,6 +45,13 @@ Vec* normalize_vec(Vec* v) {
     return create_vec(v->x / length, v->y / length, v->z / length, v->w);
 }
 
+Vec* mid_point(Vec* p1, Vec* p2) {
+    return create_vec((p1->x + p2->x) / 2.0, 
+            (p1->y + p2->y) / 2.0,
+            (p1->z + p2->z) / 2.0,
+            0.0);
+}
+
 Mat* create_rotation_mat(Vec* u, double theta) {
     double c = cos(theta);
     double s = sin(theta);

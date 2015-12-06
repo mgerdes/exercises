@@ -1,9 +1,7 @@
 typedef struct SphereObject {
     GLuint vao;
     int vertex_count;
-    double r;
-    int p;
 } SphereObject;
 
-SphereObject* create_sphere_object(double, int);
+SphereObject* create_sphere_object(void);
 void draw_sphere_object(SphereObject* sphere);

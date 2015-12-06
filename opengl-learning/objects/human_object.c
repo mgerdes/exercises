@@ -15,7 +15,7 @@ HumanObject* create_human_object(GLuint shader_program) {
     human->bone_offset_mats[16]; 
     load_mesh("objects/human_bones.dae", &human->vao, &human->vertex_count, &human->root_node, human->bone_offset_mats);
 
-    human->speed = 0.02;
+    human->speed = 0.008;
     human->direction = -1;
 
     char name[64];
@@ -36,7 +36,7 @@ void draw_human_object(HumanObject* human) {
 
 void animate_human_object(HumanObject* human) {
     human->theta += human->direction * human->speed;
-    if (abs(human->theta) > 0.02) {
+    if (human->theta*human->direction > 0.32) {
         human->direction *= -1;
     }
 
