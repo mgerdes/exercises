@@ -9,6 +9,7 @@
 #include "human_object.h"
 #include "monkey_object.h"
 #include "sphere_object.h"
+#include "plane_object.h"
 
 Camera* camera;
 
@@ -57,7 +58,19 @@ int main() {
 	glUniformMatrix4fv(proj_mat_location, 1, GL_FALSE, proj_mat->m);
     glUniformMatrix4fv(view_mat_location,1, GL_FALSE, view_mat->m);
 
-    SphereObject* sphere = create_sphere_object();
+    PlaneObject* plane = create_plane_object(shader_program, 
+            create_vec(0,0,-0.5,0), 
+            create_vec(0,0,1,0), 
+            20, 20, 1);
+    SphereObject* sphere = create_sphere_object(shader_program,
+            create_vec(0,0,0,0),
+            0.5);
+    SphereObject* sphere2 = create_sphere_object(shader_program,
+            create_vec(4,4,0,0),
+            0.5);
+    SphereObject* sphere3 = create_sphere_object(shader_program,
+            create_vec(8,8,0,0),
+            0.5);
 
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -65,9 +78,12 @@ int main() {
         handle_input();
 
         view_mat = create_look_at_mat(camera);
-        glUniformMatrix4fv(view_mat_location,1, GL_FALSE, view_mat->m);
+        glUniformMatrix4fv(view_mat_location, 1, GL_FALSE, view_mat->m);
 
         draw_sphere_object(sphere);
+        draw_sphere_object(sphere2);
+        draw_sphere_object(sphere3);
+        draw_plane_object(plane);
 
         glfwPollEvents();
         glfwSwapBuffers(window);

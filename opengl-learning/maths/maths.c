@@ -170,6 +170,14 @@ Mat* create_translation_mat(double x, double y, double z) {
     return m;
 }
 
+Mat* create_scale_mat(double x, double y, double z) {
+    Mat* m = identity_mat();
+    m->m[0] = x;
+    m->m[5] = y;
+    m->m[10] = z;
+    return m;
+}
+
 Vec* mat_times_vec(Mat* m, Vec* v) {
     double x = m->m[0] * v->x + m->m[4] * v->y + m->m[8] * v->z + m->m[12] * v->w;
     double y = m->m[1] * v->x + m->m[5] * v->y + m->m[9] * v->z + m->m[13] * v->w;
