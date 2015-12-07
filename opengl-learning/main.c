@@ -10,6 +10,7 @@
 #include "monkey_object.h"
 #include "sphere_object.h"
 #include "plane_object.h"
+#include "sphere_simulation.h"
 
 Camera* camera;
 
@@ -58,19 +59,25 @@ int main() {
 	glUniformMatrix4fv(proj_mat_location, 1, GL_FALSE, proj_mat->m);
     glUniformMatrix4fv(view_mat_location,1, GL_FALSE, view_mat->m);
 
-    PlaneObject* plane = create_plane_object(shader_program, 
-            create_vec(0,0,-0.5,0), 
-            create_vec(0,0,1,0), 
-            20, 20, 1);
-    SphereObject* sphere = create_sphere_object(shader_program,
-            create_vec(0,0,0,0),
-            0.5);
-    SphereObject* sphere2 = create_sphere_object(shader_program,
-            create_vec(4,4,0,0),
-            0.5);
-    SphereObject* sphere3 = create_sphere_object(shader_program,
-            create_vec(8,8,0,0),
-            0.5);
+    SphereSimulation* sphere_sim = create_sphere_simulation(shader_program);
+    SphereObject* s1 = create_sphere_object(shader_program, create_vec(0,1,0.5,0), 0.5);
+    SphereObject* s2 = create_sphere_object(shader_program, create_vec(4,-3,0.5,0), 0.5);
+    SphereObject* s3 = create_sphere_object(shader_program, create_vec(4,-7,0.5,0), 0.5);
+    SphereObject* s4 = create_sphere_object(shader_program, create_vec(3,-1,0.5,0), 0.5);
+    SphereObject* s5 = create_sphere_object(shader_program, create_vec(5,-8,0.5,0), 0.5);
+    SphereObject* s6 = create_sphere_object(shader_program, create_vec(3,1,0.5,0), 0.5);
+    SphereObject* s7 = create_sphere_object(shader_program, create_vec(2,8,0.5,0), 0.5);
+    SphereObject* s8 = create_sphere_object(shader_program, create_vec(-3,-3,0.5,0), 0.5);
+    SphereObject* s9 = create_sphere_object(shader_program, create_vec(3,7,0.5,0), 0.5);
+    add_sphere(sphere_sim, s1);
+    add_sphere(sphere_sim, s2);
+    add_sphere(sphere_sim, s3);
+    add_sphere(sphere_sim, s4);
+    add_sphere(sphere_sim, s5);
+    add_sphere(sphere_sim, s6);
+    add_sphere(sphere_sim, s7);
+    add_sphere(sphere_sim, s8);
+    add_sphere(sphere_sim, s9);
 
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -80,10 +87,7 @@ int main() {
         view_mat = create_look_at_mat(camera);
         glUniformMatrix4fv(view_mat_location, 1, GL_FALSE, view_mat->m);
 
-        draw_sphere_object(sphere);
-        draw_sphere_object(sphere2);
-        draw_sphere_object(sphere3);
-        draw_plane_object(plane);
+        draw_sphere_simulation(sphere_sim);
 
         glfwPollEvents();
         glfwSwapBuffers(window);

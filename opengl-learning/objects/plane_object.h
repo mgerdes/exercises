@@ -7,5 +7,5 @@ typedef struct PlaneObject {
 } PlaneObject;
 
 PlaneObject* create_plane_object(GLuint shader_program, Vec* center, Vec* normal, 
-        double width, double height, double radius);
+        double width, double height);
 void draw_plane_object(PlaneObject* plane);

@@ -23,6 +23,7 @@ Vec* rotate_vec(Vec*, Vec*, double);
 Vec* rotate_vec_y(Vec*, double);
 Vec* rotate_vec_x(Vec*, double);
 Vec* mid_point(Vec*, Vec*);
+Vec* vec_minus_vec(Vec*, Vec*);
 double dot_vec(Vec*, Vec*);
 void print_vec(Vec*);
 

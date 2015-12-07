@@ -8,7 +8,7 @@
 #include "plane_object.h"
 
 PlaneObject* create_plane_object(GLuint shader_program, Vec* center, Vec* normal, 
-        double width, double height, double radius) {
+        double width, double height) {
     GLfloat points[] = 
     {
         -width / 2.0, -height / 2.0, 0,
