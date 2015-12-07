@@ -13,13 +13,34 @@ void handle_collision(SphereObject* sphere, SphereList* sphere_list);
 
 SphereSimulation* create_sphere_simulation(GLuint shader_program) {
     SphereSimulation* s = malloc(sizeof(SphereSimulation));
-    s->plane = create_plane_object(
+
+    s->plane1 = create_plane_object(
             shader_program,
-            create_vec(0,0,0,0),
+            create_vec(0,0,-1,0),
             create_vec(0,0,1,0),
             20, 20);
-    s->sphere_list = malloc(sizeof(SphereList));
-    s->sphere_list->rest_of_spheres = 0;
+    s->plane2 = create_plane_object(
+            shader_program,
+            create_vec(-10,0,0,0),
+            create_vec(0,1,0,0),
+            20, 20);
+    s->plane3 = create_plane_object(
+            shader_program,
+            create_vec(10,0,0,0),
+            create_vec(0,1,0,0),
+            20, 20);
+    s->plane4 = create_plane_object(
+            shader_program,
+            create_vec(0,-10,0,0),
+            create_vec(1,0,0,0),
+            20, 20);
+    s->plane5 = create_plane_object(
+            shader_program,
+            create_vec(0,10,0,0),
+            create_vec(1,0,0,0),
+            20, 20);
+
+    s->sphere_list = 0;
     s->num_of_spheres = 0;
     s->time_last_drawn = glfwGetTime();
     return s;
@@ -38,7 +59,11 @@ void draw_sphere_simulation(SphereSimulation* s) {
     double elapsed_time = current_time - s->time_last_drawn; 
     s->time_last_drawn = current_time;
 
-    //draw_plane_object(s->plane);
+    draw_plane_object(s->plane1);
+    draw_plane_object(s->plane2);
+    draw_plane_object(s->plane3);
+    draw_plane_object(s->plane4);
+    draw_plane_object(s->plane5);
 
     SphereList* sphere_list = s->sphere_list; 
     for (int i = 0; i < s->num_of_spheres; i++) {
@@ -51,10 +76,6 @@ void draw_sphere_simulation(SphereSimulation* s) {
 }
 
 void handle_collision(SphereObject* sphere, SphereList* sphere_list) {
-    double current_time = glfwGetTime();
-    if (sphere->last_collision_time + 0.1 > current_time) {
-        return;
-    }
 
     double t = sphere->current_time;
 
@@ -69,6 +90,32 @@ void handle_collision(SphereObject* sphere, SphereList* sphere_list) {
     double x = x0 + vx * t;
     double y = y0 + vy * t;
     double z = z0 + vz * t;
+
+    // Check for collision with wall.
+    double max = 9.5;
+    if (fabs(x) > max || fabs(y) > max || fabs(z) > max) {
+        free(sphere->center);
+        free(sphere->velocity);
+
+        sphere->center = create_vec(x, y, z, 0);
+        sphere->theta_i = sphere->theta_i + sphere->rotation_speed * t;
+        sphere->current_time = 0;
+
+        if (fabs(x) > max) {
+            sphere->velocity = create_vec(-vx, vy, vz, 1);
+        }
+        if (fabs(y) > max) {
+            sphere->velocity = create_vec(vx, -vy, vz, 1);
+        }
+        if (fabs(z) > max) {
+            sphere->velocity = create_vec(vx, vy, -vz, 1);
+        }
+    }
+
+    double current_time = glfwGetTime();
+    if (sphere->last_collision_time + 0.2 > current_time) {
+        return;
+    }
 
     // Check for collision with other sphere.
     while (sphere_list) {
@@ -88,9 +135,9 @@ void handle_collision(SphereObject* sphere, SphereList* sphere_list) {
             double y_o = y0_o + vy_o * t_o;
             double z_o = z0_o + vz_o * t_o;
 
-            if (fabs(x - x_o) < sphere->r && 
-                    fabs(y - y_o) < sphere->r && 
-                    fabs(z - z_o) < sphere->r) {
+            if (fabs(x - x_o)-0.3 < sphere->r && 
+                    fabs(y - y_o)-0.3 < sphere->r && 
+                    fabs(z - z_o)-0.3 < sphere->r) {
                 Vec* x1 = create_vec(x,y,z,0);
                 Vec* x2 = create_vec(x_o,y_o,z_o,0);
                 Vec* v1 =  sphere->velocity;
@@ -132,25 +179,4 @@ void handle_collision(SphereObject* sphere, SphereList* sphere_list) {
         sphere_list = sphere_list->rest_of_spheres;
     }
 
-    // Check for collision with wall.
-    double max = 9.5;
-    if (fabs(x) > max || fabs(y) > max) {
-        free(sphere->center);
-        free(sphere->velocity);
-
-        sphere->center = create_vec(x, y, z, 0);
-        sphere->theta_i = sphere->theta_i + sphere->rotation_speed * t;
-        sphere->current_time = 0;
-
-        if (fabs(x) > max) {
-            sphere->velocity = create_vec(-vx, vy, vz, 1);
-            sphere->last_collision_time = current_time;
-            return;
-        }
-        if (fabs(y) > max) {
-            sphere->velocity = create_vec(vx, -vy, vz, 1);
-            sphere->last_collision_time = current_time;
-            return;
-        }
-    }
 }

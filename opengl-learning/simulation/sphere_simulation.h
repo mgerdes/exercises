@@ -4,7 +4,11 @@ typedef struct SphereList {
 } SphereList;
 
 typedef struct SphereSimulation {
-    PlaneObject* plane;
+    PlaneObject* plane1;
+    PlaneObject* plane2;
+    PlaneObject* plane3;
+    PlaneObject* plane4;
+    PlaneObject* plane5;
     SphereList* sphere_list;
     int num_of_spheres;
     double time_last_drawn;
