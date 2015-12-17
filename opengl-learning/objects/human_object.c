@@ -13,7 +13,7 @@
 HumanObject* create_human_object(GLuint shader_program) {
     HumanObject* human = malloc(sizeof(HumanObject));
     human->bone_offset_mats[16]; 
-    load_mesh("objects/human_bones.dae", &human->vao, &human->vertex_count, &human->root_node, human->bone_offset_mats);
+    load_mesh("objects/models/human_bones.dae", &human->vao, &human->vertex_count, &human->root_node, human->bone_offset_mats);
 
     human->speed = 0.008;
     human->direction = -1;

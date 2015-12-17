@@ -18,8 +18,10 @@ SphereObject* create_sphere_object(GLuint shader_program, Vec* center, double ra
     sphere->rotation_speed = 1;
     sphere->theta_i = 0;
     sphere->last_collision_time = 0;
+    sphere->next_center = 0;
+    sphere->next_velocity = 0;
 
-    load_mesh("objects/sphere.obj", &sphere->vao, &sphere->vertex_count, 0, 0);
+    load_mesh("objects/models/sphere.obj", &sphere->vao, &sphere->vertex_count, 0, 0);
 	sphere->model_mat_location = glGetUniformLocation(shader_program, "model_mat");
     return sphere;
 }

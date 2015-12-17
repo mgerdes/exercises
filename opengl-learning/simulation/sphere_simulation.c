@@ -43,6 +43,8 @@ SphereSimulation* create_sphere_simulation(GLuint shader_program) {
     s->sphere_list = 0;
     s->num_of_spheres = 0;
     s->time_last_drawn = glfwGetTime();
+    s->next_collision_time = 0;
+    s->impact_time = 0;
     return s;
 }
 
@@ -65,7 +67,7 @@ void draw_sphere_simulation(SphereSimulation* s) {
     draw_plane_object(s->plane4);
     draw_plane_object(s->plane5);
 
-    SphereList* sphere_list = s->sphere_list; 
+    SphereList* sphere_list = s->sphere_list;
     for (int i = 0; i < s->num_of_spheres; i++) {
         SphereObject* sphere = sphere_list->sphere;
         sphere->current_time += elapsed_time;
@@ -75,8 +77,97 @@ void draw_sphere_simulation(SphereSimulation* s) {
     }
 }
 
-void handle_collision(SphereObject* sphere, SphereList* sphere_list) {
+double sphere_plane_intersection_time(SphereObject* sphere, PlaneObject* plane) {
+    double t;
+    if (plane->normal->y == 1) {
+        t = (plane->center->x - sphere->r - sphere->center->x) / sphere->velocity->x;
+    } else {
+        t = (plane->center->y - sphere->r - sphere->center->y) / sphere->velocity->y;
+    }
+    if (t < 0) {
+        return 99999999;
+    } else {
+        return t;
+    }
+}
 
+void reset_colliding_spheres(SphereObject* s1, SphereObject* s2) {
+    if (s1) {
+        s1->next_velocity = s1->velocity;
+    }
+    if (s2) {
+        s2->next_velocity = s2->velocity;
+    }
+}
+
+double get_smallest_impact_time(SphereSimulation* sim) {
+    SphereList* sphere_list = sim->sphere_list; 
+
+    double min_t = 9999999, t;
+    SphereObject* colliding_sphere1 = 0;
+    SphereObject* colliding_sphere2 = 0;
+
+    while (sphere_list) {
+        SphereObject* sphere = sphere_list->sphere;
+
+        // intersect 4 planes
+        t = sphere_plane_intersection_time(sphere, sim->plane2);
+        if (t < min_t) {
+            reset_colliding_spheres(colliding_sphere1, colliding_sphere2);
+
+            colliding_sphere1 = sphere;
+            colliding_sphere2 = 0;
+
+            Vec* v = colliding_sphere1->velocity;
+            colliding_sphere1->next_velocity = create_vec(-v->x, v->y, v->z, 1);
+
+            min_t = t;
+        }
+        t = sphere_plane_intersection_time(sphere, sim->plane3);
+        if (t < min_t) {
+            reset_colliding_spheres(colliding_sphere1, colliding_sphere2);
+
+            colliding_sphere1 = sphere;
+            colliding_sphere2 = 0;
+
+            Vec* v = colliding_sphere1->velocity;
+            colliding_sphere1->next_velocity = create_vec(-v->x, v->y, v->z, 1);
+
+            min_t = t;
+        }
+        t = sphere_plane_intersection_time(sphere, sim->plane4);
+        if (t < min_t) {
+            reset_colliding_spheres(colliding_sphere1, colliding_sphere2);
+
+            colliding_sphere1 = sphere;
+            colliding_sphere2 = 0;
+
+            Vec* v = colliding_sphere1->velocity;
+            colliding_sphere1->next_velocity = create_vec(v->x, -v->y, v->z, 1);
+
+            min_t = t;
+        }
+        t = sphere_plane_intersection_time(sphere, sim->plane5);
+        if (t < min_t) {
+            reset_colliding_spheres(colliding_sphere1, colliding_sphere2);
+
+            colliding_sphere1 = sphere;
+            colliding_sphere2 = 0;
+
+            Vec* v = colliding_sphere1->velocity;
+            colliding_sphere1->next_velocity = create_vec(v->x, -v->y, v->z, 1);
+
+            min_t = t;
+        }
+
+        sphere_list = sphere_list->rest_of_spheres;
+    }
+
+    return min_t;
+}
+
+void handle_collision(SphereObject* sphere, SphereList* sphere_list) {
+    double current_time = glfwGetTime();
     double t = sphere->current_time;
 
     double x0 = sphere->center->x;
@@ -111,8 +202,6 @@ void handle_collision(SphereObject* sphere, SphereList* sphere_list) {
             sphere->velocity = create_vec(vx, vy, -vz, 1);
         }
     }
-
-    double current_time = glfwGetTime();
     if (sphere->last_collision_time + 0.2 > current_time) {
         return;
     }
@@ -178,5 +267,4 @@ void handle_collision(SphereObject* sphere, SphereList* sphere_list) {
         }
         sphere_list = sphere_list->rest_of_spheres;
     }
-
 }

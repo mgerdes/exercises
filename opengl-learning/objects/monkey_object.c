@@ -12,7 +12,7 @@
 
 MonkeyObject* create_monkey_object(GLuint shader_program) {
     MonkeyObject* monkey = malloc(sizeof(MonkeyObject));
-    load_mesh("objects/monkey.dae", &monkey->vao, &monkey->vertex_count, &monkey->root_node, monkey->bone_offset_mats);
+    load_mesh("objects/models/monkey.dae", &monkey->vao, &monkey->vertex_count, &monkey->root_node, monkey->bone_offset_mats);
 
     monkey->speed = 0.02;
     monkey->direction = -1;
