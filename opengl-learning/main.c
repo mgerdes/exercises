@@ -10,6 +10,7 @@
 #include "monkey_object.h"
 #include "sphere_object.h"
 #include "plane_object.h"
+#include "billiards_table_object.h"
 #include "sphere_simulation.h"
 
 Camera* camera;
@@ -79,6 +80,8 @@ int main() {
     add_sphere(sphere_sim, s8);
     add_sphere(sphere_sim, s9);
 
+    BilliardsTableObject* table = create_billiards_table_object(shader_program);
+
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -87,7 +90,8 @@ int main() {
         view_mat = create_look_at_mat(camera);
         glUniformMatrix4fv(view_mat_location, 1, GL_FALSE, view_mat->m);
 
-        draw_sphere_simulation(sphere_sim);
+        draw_billiards_table_object(table);
+        //draw_sphere_simulation(sphere_sim);
 
         glfwPollEvents();
         glfwSwapBuffers(window);
