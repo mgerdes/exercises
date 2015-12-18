@@ -1,29 +1,22 @@
 #version 330
-layout(location=0) in vec3 vertex_position;
-layout(location=1) in vec3 vertex_normal;
-layout(location=2) in int bone_id;
 
-uniform mat4 view_mat, proj_mat, model_mat;
-uniform mat4 bone_matrices[64];
+layout(location=0) in vec3 vert_position;
+layout(location=1) in vec3 vert_normal;
+layout(location=2) in vec2 vert_texture_position;
 
-out vec3 color;
+uniform mat4 model_mat;
+uniform mat4 view_mat;
+uniform mat4 proj_mat;
+
+out vec3 frag_position;
+out vec3 frag_normal;
+out vec2 frag_texture_position;
 
 void main () {
-    color = vec3(0,0,0);
-    if (bone_id == 0) {
-        color.r = 1;
-    }
-    if (bone_id == 1) {
-        color.g = 1;
-    }
-    if (bone_id == 2) {
-        color.b = 1;
-    }
-    if (bone_id == 3) {
-        color.g = 1;
-    }
-    color = vertex_normal;
-    //gl_Position = proj_mat * view_mat * bone_matrices[bone_id] * vec4(vertex_position, 1.0);
-    gl_Position = proj_mat * view_mat * vec4(vertex_position, 1.0);
+    frag_position = vert_position;
+    frag_normal = vert_normal;
+    frag_texture_position = vert_texture_position;
+
+    gl_Position = proj_mat * view_mat * model_mat * vec4(position, 1.0);
 }
 
