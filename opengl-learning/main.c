@@ -6,12 +6,6 @@
 #include "camera.h"
 #include "maths.h"
 #include "mesh_import.h"
-#include "human_object.h"
-#include "monkey_object.h"
-#include "sphere_object.h"
-#include "plane_object.h"
-#include "billiards_table_object.h"
-#include "sphere_simulation.h"
 #include "mesh.h"
 #include "model.h"
 
@@ -56,12 +50,13 @@ int main() {
 	GLint proj_mat_location = glGetUniformLocation(shader_program, "proj_mat");
 	GLint view_mat_location = glGetUniformLocation(shader_program, "view_mat");
 
-    Mat* proj_mat = create_perspective_mat(67.0, 1.0, 0.1, 1000.0);   
+    Mat* proj_mat = create_perspective_mat(67.0, 1.0, 0.1, 1000.0);
     Mat* view_mat = create_look_at_mat(camera);
 
 	glUniformMatrix4fv(proj_mat_location, 1, GL_FALSE, proj_mat->m);
     glUniformMatrix4fv(view_mat_location,1, GL_FALSE, view_mat->m);
 
+    Model* balls = create_model("objects/models/pool.obj", shader_program);
     Model* table = create_model("objects/models/hi.obj", shader_program);
 
     while (!glfwWindowShouldClose(window)) {
@@ -72,6 +67,7 @@ int main() {
         view_mat = create_look_at_mat(camera);
         glUniformMatrix4fv(view_mat_location, 1, GL_FALSE, view_mat->m);
 
+        draw_model(balls);
         draw_model(table);
 
         glfwPollEvents();

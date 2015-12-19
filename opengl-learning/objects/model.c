@@ -44,6 +44,9 @@ static Mesh* process_mesh(struct aiMesh* mesh, struct aiScene* scene) {
             vertices[i]->texture_coords = create_vec(texture.x, texture.y, texture.z, 1.0);
         }
     } else {
+        for (int i = 0; i < mesh->mNumVertices; i++) {
+            vertices[i]->texture_coords = 0;
+        }
         gl_log(INFO, "A mesh was processed with no texture coordinates.");
     }
 

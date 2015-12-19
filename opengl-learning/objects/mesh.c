@@ -23,8 +23,13 @@ Mesh* create_mesh(Vertex** vertices, int num_vertices, Texture* texture, Materia
         normals[i * 3 + 1] = vertices[i]->normal->y;
         normals[i * 3 + 2] = vertices[i]->normal->z;
 
-        texture_coords[i * 2] = vertices[i]->texture_coords->x;
-        texture_coords[i * 2 + 1] = vertices[i]->texture_coords->y;
+        if (vertices[i]->texture_coords) {
+            texture_coords[i * 2] = vertices[i]->texture_coords->x;
+            texture_coords[i * 2 + 1] = vertices[i]->texture_coords->y;
+        } else {
+            texture_coords[i * 2] = 0;
+            texture_coords[i * 2 + 1] = 0;
+        }
     }
 
     GLuint mesh_vao;
