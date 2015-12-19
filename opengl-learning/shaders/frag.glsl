@@ -1,4 +1,4 @@
-#version 330
+#version 330 core
 
 struct Material {
     vec3 ambient_color;
@@ -16,11 +16,12 @@ struct Light {
 
 in vec3 frag_position;
 in vec3 frag_normal;
-in vec2 frag_texture_position;
+in vec2 frag_texture_coords;
 
 uniform Material material;
 uniform Light light;
 uniform vec3 camera_position;
+uniform sampler2D material_texture;
 
 out vec4 color;
 
@@ -40,6 +41,8 @@ void main () {
     float p = pow(max(dot(view_direction, reflected_direction), 0.0), material.shininess);
     vec3 specular_color = p * light.specular_color * material.specular_color;
 
-    color = vec4(ambient_color + diffuse_color + specular_color, 1.0);
-    color = vec4(1.0, 1.0, 1.0, 1.0);
+    vec4 texel = texture(material_texture, frag_texture_coords);
+
+    color = vec4(ambient_color + diffuse_color + specular_color, 1.0) * texel;
 }
+

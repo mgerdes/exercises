@@ -53,8 +53,8 @@ int main() {
     init_gl("opengl");
 
     GLuint shader_program = create_shader_program("shaders/frag.glsl", "shaders/vert.glsl");
-	GLuint proj_mat_location = glGetUniformLocation(shader_program, "proj_mat");
-	GLuint view_mat_location = glGetUniformLocation(shader_program, "view_mat");
+	GLint proj_mat_location = glGetUniformLocation(shader_program, "proj_mat");
+	GLint view_mat_location = glGetUniformLocation(shader_program, "view_mat");
 
     Mat* proj_mat = create_perspective_mat(67.0, 1.0, 0.1, 1000.0);   
     Mat* view_mat = create_look_at_mat(camera);
@@ -62,7 +62,7 @@ int main() {
 	glUniformMatrix4fv(proj_mat_location, 1, GL_FALSE, proj_mat->m);
     glUniformMatrix4fv(view_mat_location,1, GL_FALSE, view_mat->m);
 
-    Model* table = create_model("objects/models/table.dae");
+    Model* table = create_model("objects/models/hi.obj", shader_program);
 
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

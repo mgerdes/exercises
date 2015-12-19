@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.76.0 commit date:2015-11-03, commit time:10:56, hash:f337fea</authoring_tool>
     </contributor>
-    <created>2015-12-18T19:18:38</created>
-    <modified>2015-12-18T19:18:38</modified>
+    <created>2015-12-18T20:50:11</created>
+    <modified>2015-12-18T20:50:11</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -1958,411 +1958,493 @@
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
       <node id="ChamferBox" name="ChamferBox" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#ChamferBox-mesh" name="ChamferBox">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_5_-_Default-material" target="#_5_-_Default-material"/>
+              <instance_material symbol="_5_-_Default-material" target="#_5_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="ChamferBo0" name="ChamferBo0" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#ChamferBo0-mesh" name="ChamferBo0">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_2_-_Default-material" target="#_2_-_Default-material"/>
+              <instance_material symbol="_2_-_Default-material" target="#_2_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="ChamferBo1" name="ChamferBo1" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#ChamferBo1-mesh" name="ChamferBo1">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_2_-_Default-material" target="#_2_-_Default-material"/>
+              <instance_material symbol="_2_-_Default-material" target="#_2_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="ChamferBo2" name="ChamferBo2" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#ChamferBo2-mesh" name="ChamferBo2">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_2_-_Default-material" target="#_2_-_Default-material"/>
+              <instance_material symbol="_2_-_Default-material" target="#_2_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="ChamferBo3" name="ChamferBo3" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#ChamferBo3-mesh" name="ChamferBo3">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_2_-_Default-material" target="#_2_-_Default-material"/>
+              <instance_material symbol="_2_-_Default-material" target="#_2_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="ChamferBo4" name="ChamferBo4" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#ChamferBo4-mesh" name="ChamferBo4">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_2_-_Default-material" target="#_2_-_Default-material"/>
+              <instance_material symbol="_2_-_Default-material" target="#_2_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="ChamferBo5" name="ChamferBo5" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#ChamferBo5-mesh" name="ChamferBo5">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_2_-_Default-material" target="#_2_-_Default-material"/>
+              <instance_material symbol="_2_-_Default-material" target="#_2_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Box001" name="Box001" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Box001-mesh" name="Box001">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_2_-_Default-material" target="#_2_-_Default-material"/>
+              <instance_material symbol="_2_-_Default-material" target="#_2_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Sphere007" name="Sphere007" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Sphere007-mesh" name="Sphere007">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_4_-_Default-material" target="#_4_-_Default-material"/>
+              <instance_material symbol="_4_-_Default-material" target="#_4_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Sphere008" name="Sphere008" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Sphere008-mesh" name="Sphere008">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_4_-_Default-material" target="#_4_-_Default-material"/>
+              <instance_material symbol="_4_-_Default-material" target="#_4_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Sphere009" name="Sphere009" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Sphere009-mesh" name="Sphere009">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_4_-_Default-material" target="#_4_-_Default-material"/>
+              <instance_material symbol="_4_-_Default-material" target="#_4_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Sphere010" name="Sphere010" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Sphere010-mesh" name="Sphere010">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_4_-_Default-material" target="#_4_-_Default-material"/>
+              <instance_material symbol="_4_-_Default-material" target="#_4_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Cylinder00" name="Cylinder00" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Cylinder00-mesh" name="Cylinder00">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material"/>
+              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Cylinder01" name="Cylinder01" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Cylinder01-mesh" name="Cylinder01">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material"/>
+              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Cylinder02" name="Cylinder02" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Cylinder02-mesh" name="Cylinder02">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material"/>
+              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Cylinder03" name="Cylinder03" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Cylinder03-mesh" name="Cylinder03">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material"/>
+              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Cylinder04" name="Cylinder04" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Cylinder04-mesh" name="Cylinder04">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_5_-_Default-material" target="#_5_-_Default-material"/>
+              <instance_material symbol="_5_-_Default-material" target="#_5_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Cylinder05" name="Cylinder05" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Cylinder05-mesh" name="Cylinder05">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_5_-_Default-material" target="#_5_-_Default-material"/>
+              <instance_material symbol="_5_-_Default-material" target="#_5_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Cylinder06" name="Cylinder06" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Cylinder06-mesh" name="Cylinder06">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_5_-_Default-material" target="#_5_-_Default-material"/>
+              <instance_material symbol="_5_-_Default-material" target="#_5_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Cylinder07" name="Cylinder07" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Cylinder07-mesh" name="Cylinder07">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_5_-_Default-material" target="#_5_-_Default-material"/>
+              <instance_material symbol="_5_-_Default-material" target="#_5_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="ChamferBo6" name="ChamferBo6" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#ChamferBo6-mesh" name="ChamferBo6">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material"/>
+              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="ChamferBo7" name="ChamferBo7" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#ChamferBo7-mesh" name="ChamferBo7">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material"/>
+              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="ChamferBo8" name="ChamferBo8" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#ChamferBo8-mesh" name="ChamferBo8">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material"/>
+              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="ChamferBo9" name="ChamferBo9" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#ChamferBo9-mesh" name="ChamferBo9">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material"/>
+              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Cylinder08" name="Cylinder08" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Cylinder08-mesh" name="Cylinder08">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material"/>
+              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Cylinder09" name="Cylinder09" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Cylinder09-mesh" name="Cylinder09">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material"/>
+              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Sphere011" name="Sphere011" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Sphere011-mesh" name="Sphere011">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_4_-_Default-material" target="#_4_-_Default-material"/>
+              <instance_material symbol="_4_-_Default-material" target="#_4_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Sphere012" name="Sphere012" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Sphere012-mesh" name="Sphere012">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_4_-_Default-material" target="#_4_-_Default-material"/>
+              <instance_material symbol="_4_-_Default-material" target="#_4_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Cylinder10" name="Cylinder10" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Cylinder10-mesh" name="Cylinder10">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material"/>
+              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Cylinder11" name="Cylinder11" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Cylinder11-mesh" name="Cylinder11">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material"/>
+              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Cylinder12" name="Cylinder12" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Cylinder12-mesh" name="Cylinder12">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material"/>
+              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Cylinder13" name="Cylinder13" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Cylinder13-mesh" name="Cylinder13">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material"/>
+              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="ChamferB10" name="ChamferB10" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#ChamferB10-mesh" name="ChamferB10">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material"/>
+              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Box002" name="Box002" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Box002-mesh" name="Box002">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material"/>
+              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Box003" name="Box003" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Box003-mesh" name="Box003">
           <bind_material>
             <technique_common>
-              <instance_material symbol="Material__25-material" target="#Material__25-material"/>
+              <instance_material symbol="Material__25-material" target="#Material__25-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Box005" name="Box005" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Box005-mesh" name="Box005">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material"/>
+              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="ChamferB11" name="ChamferB11" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#ChamferB11-mesh" name="ChamferB11">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material"/>
+              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="ChamferB12" name="ChamferB12" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#ChamferB12-mesh" name="ChamferB12">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material"/>
+              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="ChamferB13" name="ChamferB13" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#ChamferB13-mesh" name="ChamferB13">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material"/>
+              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="Cylinder14" name="Cylinder14" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#Cylinder14-mesh" name="Cylinder14">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_9_-_Default-material" target="#_9_-_Default-material"/>
+              <instance_material symbol="_9_-_Default-material" target="#_9_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
       </node>
       <node id="ChamferB14" name="ChamferB14" type="NODE">
-        <matrix sid="transform">0.003422485 -0.005517236 0.007605702 0 -0.006305237 -0.007349954 -0.002494424 0 0.006966389 -0.003941862 -0.005994259 0 0 0 0 1</matrix>
+        <matrix sid="transform">0.01 0 0 0 0 0.01 0 0 0 0 0.01 0 0 0 0 1</matrix>
         <instance_geometry url="#ChamferB14-mesh" name="ChamferB14">
           <bind_material>
             <technique_common>
-              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material"/>
+              <instance_material symbol="_3_-_Default-material" target="#_3_-_Default-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>

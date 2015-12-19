@@ -1,13 +1,25 @@
+typedef struct Material {
+    Vec* diffuse_color;
+    Vec* ambient_color;
+    Vec* specular_color;
+} Material;
+
+typedef struct Texture {
+    GLuint id;
+} Texture;
+
 typedef struct Vertex {
     Vec* position;
     Vec* normal;
-    Vec* texture;
+    Vec* texture_coords;
 } Vertex;
 
 typedef struct Mesh {
     GLuint vao;
     int num_vertices;
+    Texture* texture;
+    Material* material;
 } Mesh;
 
-Mesh* create_mesh(Vertex** vertices, int num_vertices);
-void draw_mesh(Mesh* mesh);
+Mesh* create_mesh(Vertex** vertices, int num_vertices, Texture* texture, Material* material);
+void draw_mesh(Mesh* mesh, GLint shader_program);

@@ -12,7 +12,7 @@
 #include "model.h"
 
 static Mesh* process_mesh(struct aiMesh* mesh, struct aiScene* scene) {
-    Vertex** vertices = malloc(sizeof(Vertex*) * mesh->mNumVertices);
+    Vertex **vertices = malloc(sizeof(Vertex *) * mesh->mNumVertices);
     for (int i = 0; i < mesh->mNumVertices; i++) {
         vertices[i] = malloc(sizeof(Vertex));
     }
@@ -41,15 +41,35 @@ static Mesh* process_mesh(struct aiMesh* mesh, struct aiScene* scene) {
     if (mesh->mTextureCoords[0]) {
         for (int i = 0; i < mesh->mNumVertices; i++) {
             struct aiVector3D texture = mesh->mTextureCoords[0][i];
-            vertices[i]->texture = create_vec(texture.x, texture.y, texture.z, 1.0);
+            vertices[i]->texture_coords = create_vec(texture.x, texture.y, texture.z, 1.0);
         }
     } else {
         gl_log(INFO, "A mesh was processed with no texture coordinates.");
     }
 
-    // --TODO-- Process materials
+    // Process material
+    Texture* mesh_texture = malloc(sizeof(Texture));
+    Material* mesh_material = malloc(sizeof(Material));
+    if (mesh->mMaterialIndex >= 0) {
+        struct aiString path;
+        struct aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];
+        aiGetMaterialTexture(material, aiTextureType_DIFFUSE, 0, &path, 0, 0, 0, 0, 0, 0);
+        mesh_texture->id = create_texture(path.data);
 
-    return create_mesh(vertices, mesh->mNumVertices);
+        struct aiColor4D color;
+        aiGetMaterialColor(material, AI_MATKEY_COLOR_DIFFUSE, &color);
+        mesh_material->diffuse_color = create_vec(color.r, color.g, color.b, color.a);
+
+        aiGetMaterialColor(material, AI_MATKEY_COLOR_AMBIENT, &color);
+        mesh_material->ambient_color = create_vec(color.r, color.g, color.b, color.a);
+
+        aiGetMaterialColor(material, AI_MATKEY_COLOR_SPECULAR, &color);
+        mesh_material->specular_color = create_vec(color.r, color.g, color.b, color.a);
+    } else {
+        gl_log(INFO, "A mesh was processed with no material.");
+    }
+
+    return create_mesh(vertices, mesh->mNumVertices, mesh_texture, mesh_material);
 }
 
 static void process_node(Model* model, struct aiNode* node, struct aiScene* scene) {
@@ -63,7 +83,7 @@ static void process_node(Model* model, struct aiNode* node, struct aiScene* scen
     }
 }
 
-Model* create_model(char* filename) {
+Model* create_model(char* filename, GLint shader_program) {
     struct aiScene* scene = aiImportFile(filename, aiProcess_Triangulate);
     if (!scene) {
         gl_log(ERROR, "Cannot open scene file: %s", filename);
@@ -77,18 +97,30 @@ Model* create_model(char* filename) {
     gl_log(INFO, "%d materials", scene->mNumMaterials);
     gl_log(INFO, "%d meshes", scene->mNumMeshes);
     gl_log(INFO, "%d textures", scene->mNumTextures);
-    
+
+    GLint light_position = glGetUniformLocation(shader_program, "light.position");
+    GLint light_ambient = glGetUniformLocation(shader_program, "light.ambient_color");
+    GLint light_diffuse = glGetUniformLocation(shader_program, "light.diffuse_color");
+    GLint light_specular = glGetUniformLocation(shader_program, "light.specular_color");
+
+    glUniform3f(light_position, 0.0, 100.0, 10.0);
+    glUniform3f(light_ambient, 1.0f, 1.0f, 1.0f);
+    glUniform3f(light_diffuse, 1.0f, 1.0f, 1.0f);
+    glUniform3f(light_specular, 1.0f, 1.0f, 1.0f);
+
     Model* model = malloc(sizeof(Model));
     model->num_meshes = scene->mNumMeshes;
     model->meshes = malloc(sizeof(Mesh*) * scene->mNumMeshes);
 
     process_node(model, scene->mRootNode, scene);
 
+    model->shader_program = shader_program;
+
     return model;
 }
 
 void draw_model(Model* model) {
     for (int i = 0; i < model->num_meshes; i++) {
-        draw_mesh(model->meshes[i]);
+        draw_mesh(model->meshes[i], model->shader_program);
     }
 }
