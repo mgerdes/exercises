@@ -12,6 +12,8 @@
 #include "plane_object.h"
 #include "billiards_table_object.h"
 #include "sphere_simulation.h"
+#include "mesh.h"
+#include "model.h"
 
 Camera* camera;
 
@@ -60,27 +62,7 @@ int main() {
 	glUniformMatrix4fv(proj_mat_location, 1, GL_FALSE, proj_mat->m);
     glUniformMatrix4fv(view_mat_location,1, GL_FALSE, view_mat->m);
 
-    SphereSimulation* sphere_sim = create_sphere_simulation(shader_program);
-    SphereObject* s1 = create_sphere_object(shader_program, create_vec(0,1,0.5,0), 0.8);
-    SphereObject* s2 = create_sphere_object(shader_program, create_vec(4,-3,0.5,0), 0.8);
-    SphereObject* s3 = create_sphere_object(shader_program, create_vec(-3,-7,0.5,0), 0.8);
-    SphereObject* s4 = create_sphere_object(shader_program, create_vec(-1,-1,0.5,0), 0.8);
-    SphereObject* s5 = create_sphere_object(shader_program, create_vec(-8,-8,0.5,0), 0.8);
-    SphereObject* s6 = create_sphere_object(shader_program, create_vec(3,1,0.5,0), 0.8);
-    SphereObject* s7 = create_sphere_object(shader_program, create_vec(2,8,0.5,0), 0.8);
-    SphereObject* s8 = create_sphere_object(shader_program, create_vec(-3,-3,0.5,0), 0.8);
-    SphereObject* s9 = create_sphere_object(shader_program, create_vec(3,7,0.5,0), 0.8);
-    add_sphere(sphere_sim, s1);
-    add_sphere(sphere_sim, s2);
-    add_sphere(sphere_sim, s3);
-    add_sphere(sphere_sim, s4);
-    add_sphere(sphere_sim, s5);
-    add_sphere(sphere_sim, s6);
-    add_sphere(sphere_sim, s7);
-    add_sphere(sphere_sim, s8);
-    add_sphere(sphere_sim, s9);
-
-    BilliardsTableObject* table = create_billiards_table_object(shader_program);
+    Model* table = create_model("objects/models/table.dae");
 
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -90,8 +72,7 @@ int main() {
         view_mat = create_look_at_mat(camera);
         glUniformMatrix4fv(view_mat_location, 1, GL_FALSE, view_mat->m);
 
-        draw_billiards_table_object(table);
-        //draw_sphere_simulation(sphere_sim);
+        draw_model(table);
 
         glfwPollEvents();
         glfwSwapBuffers(window);

@@ -1,3 +1,9 @@
+typedef struct Vertex {
+    Vec* position;
+    Vec* normal;
+    Vec* texture;
+} Vertex;
+
 typedef struct Mesh {
     GLuint vao;
     int num_vertices;

@@ -1,3 +1,14 @@
+#include <assimp/cimport.h>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include "gl_utils.h"
+#include "camera.h"
+#include "maths.h"
+#include "mesh.h"
 #include "model.h"
 
 static Mesh* process_mesh(struct aiMesh* mesh, struct aiScene* scene) {
@@ -19,7 +30,7 @@ static Mesh* process_mesh(struct aiMesh* mesh, struct aiScene* scene) {
     // Process normals
     if (mesh->mNormals) {
         for (int i = 0; i < mesh->mNumVertices; i++) {
-            struct aiVector3D normal = mesh->mVertices[i];
+            struct aiVector3D normal = mesh->mNormals[i];
             vertices[i]->normal = create_vec(normal.x, normal.y, normal.z, 1.0);
         }
     } else {
@@ -29,7 +40,7 @@ static Mesh* process_mesh(struct aiMesh* mesh, struct aiScene* scene) {
     // Process texture coords
     if (mesh->mTextureCoords[0]) {
         for (int i = 0; i < mesh->mNumVertices; i++) {
-            struct aiVector2D texture = mesh->mTextureCoords[0][i];
+            struct aiVector3D texture = mesh->mTextureCoords[0][i];
             vertices[i]->texture = create_vec(texture.x, texture.y, texture.z, 1.0);
         }
     } else {
@@ -44,7 +55,7 @@ static Mesh* process_mesh(struct aiMesh* mesh, struct aiScene* scene) {
 static void process_node(Model* model, struct aiNode* node, struct aiScene* scene) {
     for (int i = 0; i < node->mNumMeshes; i++) {
         struct aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-        process_mesh(mesh, scene);
+        model->meshes[node->mMeshes[i]] = process_mesh(mesh, scene);
     }
 
     for (int i = 0; i < node->mNumChildren; i++) {
