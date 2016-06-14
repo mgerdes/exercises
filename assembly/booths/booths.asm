@@ -1,14 +1,31 @@
-    .MODEL  LARGE
-    .386
+; Microsystems Homework 0
+; Michael Gerdes 6/14/2016
+    .MODEL  SMALL
+    .586
     .STACK  100h
     .DATA
-multiplicand    DW 4
-multiplier      DW 4
+input_number_1  DB 'Enter a number: $'
+input_number_2  DB 'Enter another number: $'
+new_line        DB 13, 10, '$'
+multiplicand    DW 0
+multiplier      DW 0
     .CODE
-    EXTRN   PutDDec : NEAR
+    EXTRN   PutDDec : NEAR, GetDec : Near
 Booths PROC
     mov     ax, @data
     mov     ds, ax
+
+    mov     dx, OFFSET input_number_1
+    mov     AH, 09h
+    int     21h
+    call    GetDec
+    mov     multiplicand, ax
+
+    mov     dx, OFFSET input_number_2
+    mov     AH, 09h
+    int     21h
+    call    GetDec
+    mov     multiplier, ax
 
     mov     cx, 16
     mov     bx, multiplicand
@@ -17,38 +34,30 @@ Booths PROC
     clc
 
 begin_loop:
-    ; Save the carry flag
-    pushf
-    ; Check lsb of multiplier
-    test    multiplier, 1
-    jnz     lsb_1
-    ; Get carry flag back
-    popf
-    jc      lsb_0_cf_1
-    ; LSB is 0 and CF is 0 so skip this  
-    jmp     end_lsb_check
-lsb_0_cf_1:
-    ; LSB is 0 and CF is 1
-    add     dx, multiplicand
-    jmp     end_lsb_check
-lsb_1:
-    popf
-    ; LSB is 1 and CF is 0 so skip this 
-    jc      end_lsb_check
-lsb_1_cf_0:
-    ; LSB is 1 and CF is 0
-    sub     dx, multiplicand    
-    jmp     end_lsb_check
-end_lsb_check:
-    ; Shift LSB of DX into MSB of AX
-    shrd    ax, dx, 1
-    pushf
-    sar     dx, 1
-    popf
-    jcxz    end_loop
+    jc      cf_1
+cf_0:
+    test    ax, 1 
+    jz      do_shift
+    ; CF 0 and LSB 1
+    sub     dx, bx
+    jmp     do_shift
+cf_1:
+    test    ax, 1
+    jnz     do_shift
+    ; CF 1 and LSB 0
+    add     dx, bx 
+    jmp     do_shift
+do_shift:
+    sar     dx, 1 
+    rcr     ax, 1
     dec     cx
-jmp begin_loop
-end_loop:
+    jnz     begin_loop     
+
+    ; mov DX:AX into EAX
+    mov     bx, ax
+    mov     ax, dx
+    shl     eax, 10h
+    mov     ax, bx
 
     call    PutDDec
     
